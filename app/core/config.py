@@ -15,6 +15,10 @@ class ApiV1Prefix(BaseModel):
 class ApiPrefix(BaseModel):
     prefix: str = "/api"
     v1: ApiV1Prefix = ApiV1Prefix()
+    
+    
+class AccessToken(BaseModel):
+    lifetime_second: int = 3600
 
 
 class DatabaseConfig(BaseModel):
@@ -43,6 +47,7 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
+    access_token: AccessToken
 
 
 settings = Settings()
