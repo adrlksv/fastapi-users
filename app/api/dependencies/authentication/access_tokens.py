@@ -5,7 +5,7 @@ from typing import (
 
 from fastapi import Depends
 
-from app.core.models import (
+from core.models import (
     db_helper,
     AccessToken
 )
@@ -20,4 +20,4 @@ async def get_access_token_db(
         Depends(db_helper.session_getter)
     ],
 ):  
-    yield AccessToken.get_db(session, AccessToken)
+    yield AccessToken.get_db(session=session)

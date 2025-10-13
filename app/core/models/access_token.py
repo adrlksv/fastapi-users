@@ -15,8 +15,8 @@ from sqlalchemy.orm import (
     mapped_column
 )
 
-from app.core.models.base import Base
-from app.core.types.user_id import UserIdType
+from core.models.base import Base
+from core.types.user_id import UserIdType
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

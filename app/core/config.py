@@ -9,16 +9,27 @@ class RunConfig(BaseModel):
 
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
+    auth: str = "/auth"
     users: str = "/users"
+    messages: str = "/messages"
 
 
 class ApiPrefix(BaseModel):
     prefix: str = "/api"
     v1: ApiV1Prefix = ApiV1Prefix()
+
+    @property
+    def bearer_token_url(self) -> str:
+        parts = (self.prefix, self.v1.prefix, self.v1.auth, "/login")
+        path = "".join(parts)
+
+        return path.removeprefix("/")
     
     
 class AccessToken(BaseModel):
     lifetime_second: int = 3600
+    reset_password_token_secret: str
+    verification_token_secret: str
 
 
 class DatabaseConfig(BaseModel):

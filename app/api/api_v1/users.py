@@ -1,47 +1,24 @@
-from typing import Annotated
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from core.models.user import User
-from core.schemas.user import UserCreate, UserRead
-from core.models import db_helper
-
-from crud.users import get_all_users, create_user as create_users_crud
-
-
-router = APIRouter(tags=["Users"])
-
-
-@router.get(
-    "",
-    response_model=list[UserRead],
+from core.config import settings
+from core.schemas.user import (
+    UserRead,
+    UserUpdate,
 )
-async def get_users(
-    session: Annotated[
-        AsyncSession, 
-        Depends(db_helper.session_getter)
-    ],
-):
-    users = await get_all_users(session=session)
 
-    return users
+from api.api_v1.fastapi_users_router import fastapi_users
 
 
-@router.post(
-    "",
-    response_model=UserRead,
+router = APIRouter(
+    prefix=settings.api.v1.users,
+    tags=["Users"],
 )
-async def create_user(
-    user_create: UserCreate,
-    session: Annotated[
-        AsyncSession, 
-        Depends(db_helper.session_getter)
-    ],
-) -> User:
-    user = await create_users_crud(
-        session=session,
-        user_create=user_create,
+
+# /me
+# /{id}
+router.include_router(
+    router=fastapi_users.get_users_router(
+        UserRead,
+        UserUpdate,
     )
-
-    return user
+)
