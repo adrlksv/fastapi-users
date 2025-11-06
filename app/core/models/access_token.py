@@ -15,16 +15,14 @@ from sqlalchemy.orm import (
     mapped_column
 )
 
-from core.models.base import Base
-from core.types.user_id import UserIdType
+from app.core.models.base import Base
+from app.core.types.user_id import UserIdType
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[UserIdType]):  
-    pass
-
     user_id: Mapped[UserIdType] = mapped_column(
         Integer,
         ForeignKey("users.id", ondelete="cascade"),
