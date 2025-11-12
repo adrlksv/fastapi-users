@@ -5,15 +5,18 @@ from fastapi_users_db_sqlalchemy import (
     SQLAlchemyUserDatabase
 )
 
-from app.core.models.base import Base
-from app.core.models.mixins.int_id_pk import IntIdPkMixin
-from app.core.types.user_id import UserIdType
+from core.models.base import Base
+from core.models.mixins.int_id_pk import IntIdPkMixin
+from core.types.user_id import UserIdType
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
+    __table_args__ = {
+        "extend_existing": True,
+    }
     pass
 
     @classmethod

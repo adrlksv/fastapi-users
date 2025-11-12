@@ -4,8 +4,8 @@ from os import getenv
 
 from api.dependencies.authentication.users import get_user_db
 
-from app.core.authentication.user_manager import UserManager
-from app.core.models.user import User
+from core.authentication.user_manager import UserManager
+from core.models.user import User
 from core.schemas.user import UserCreate
 from core.models import db_helper
 

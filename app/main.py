@@ -50,11 +50,26 @@ def create_app() -> FastAPI:
     return app
 
 
+main_app = create_app()
+
+
+# main_app = FastAPI(
+#     default_response_class=ORJSONResponse,
+#     lifespan=lifespan,
+# )
+# main_app.include_router(
+#     api_router,
+#     prefix=settings.api.prefix,
+# )
+
+# register_middlewares(main_app)
+
+
 if __name__ == "__main__":
     uvicorn.run(
-        "main:create_app",
+        "main:main_app",
         host=settings.run.host,
         port=settings.run.port,
-        factory=True,
+        # factory=True,
         reload=True
     )
