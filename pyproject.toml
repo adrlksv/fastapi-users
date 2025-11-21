@@ -10,6 +10,7 @@ asyncpg = "^0.30.0"
 alembic = "^1.16.5"
 pydantic = "^2.11.7"
 fastapi-users = {extras = ["sqlalchemy"], version = "^14.0.1"}
+gunicorn = "^23.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"

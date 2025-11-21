@@ -1,3 +1,8 @@
+__all__ = (
+    "main_app",
+    "main",
+)
+
 from core.gunicorn import Application, get_app_options
 from core.config import settings
 
@@ -13,6 +18,7 @@ def main():
             port=settings.gunicorn.port,
             workers=settings.gunicorn.workers,
             timeout=settings.gunicorn.timeout,
+            log_level=settings.logging.log_level,
         ),
     )
     app.run()

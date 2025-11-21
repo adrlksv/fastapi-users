@@ -4,7 +4,7 @@ from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-LOG_DEFAULT_FORMAT = "[%(actime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
+LOG_DEFAULT_FORMAT = "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
 
 
 class RunConfig(BaseModel):
@@ -35,6 +35,7 @@ class ApiV1Prefix(BaseModel):
     auth: str = "/auth"
     users: str = "/users"
     messages: str = "/messages"
+    deps: str = "/deps"
 
 
 class ApiPrefix(BaseModel):
@@ -80,7 +81,7 @@ class Settings(BaseSettings):
     )
     run: RunConfig = RunConfig()
     gunicorn: GunicornConfig = GunicornConfig()
-    logging: LoggingConfig
+    logging: LoggingConfig = LoggingConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
     access_token: AccessToken

@@ -14,15 +14,10 @@ from core.models import db_helper
 from middlewares import register_middlewares
 
 import uvicorn
-import sys
 
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
+    format=settings.logging.log_format,
 )
 
 
@@ -50,7 +45,7 @@ def create_app() -> FastAPI:
     return app
 
 
-main_app = create_app()
+# main_app = create_app()
 
 
 # main_app = FastAPI(
@@ -67,9 +62,9 @@ main_app = create_app()
 
 if __name__ == "__main__":
     uvicorn.run(
-        "main:main_app",
+        "main:create_app",
         host=settings.run.host,
         port=settings.run.port,
-        # factory=True,
+        factory=True,
         reload=True
     )

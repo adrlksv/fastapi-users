@@ -9,6 +9,7 @@ from core.config import settings
 from .auth import router as auth_router
 from .users import router as user_router
 from .messages import router as messages_router
+from .dependencies_example import router as router_deps_example
 
 
 http_bearer = HTTPBearer(auto_error=False)
@@ -20,3 +21,4 @@ router = APIRouter(
 router.include_router(auth_router)
 router.include_router(user_router)
 router.include_router(messages_router)
+router.include_router(router_deps_example)
